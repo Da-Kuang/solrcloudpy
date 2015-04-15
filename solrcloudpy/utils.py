@@ -64,8 +64,11 @@ class _Request(object):
 
             except ConnectionError as e:
                 print 'exception: ', e
-                host = servers.pop(0)
-                return make_request(host, path)
+                if len(servers) > 0:
+                    host = servers.pop(0)
+                    return make_request(host, path)
+
+                raise SolrException(str(e))
 
         result = make_request(host, path)
         return result
