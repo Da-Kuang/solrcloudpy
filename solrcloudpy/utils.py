@@ -55,7 +55,7 @@ class _Request(object):
                                         params=resparams,
                                         headers=headers, data=body, timeout=self.timeout)
 
-                if hasattr(r, 'status_code') and r.status_code != 200:
+                if len(servers) > 0 and hasattr(r, 'status_code') and r.status_code != 200:
                     print 'exception: ', getattr(r, 'text')
                     host = servers.pop(0)
                     return make_request(host, path)
